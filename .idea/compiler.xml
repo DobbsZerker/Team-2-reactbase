@@ -11,6 +11,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Backend" target="1.5" />
+      <module name="demo" target="18" />
       <module name="untitled" target="1.8" />
     </bytecodeTargetLevel>
   </component>

@@ -27,7 +27,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.NaturalId;
 
 @Entity
-public class Restaurant implements Serializable {
+public class Restaurant extends City implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
