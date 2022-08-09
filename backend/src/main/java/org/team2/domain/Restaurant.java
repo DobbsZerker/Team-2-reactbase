@@ -63,19 +63,19 @@ public class Restaurant implements Serializable {
 	protected Restaurant() {
 	}
 
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public void setName(String name) {
-		this.business_name = name;
-	}
 
 
 
-	public Restaurant(String city, String name) {
+
+	public Restaurant(String city, String name, Integer stars, Integer review_count, String categories, String address, Long id) {
 		this.city = city;
 		this.business_name = name;
+		this.address = address;
+		this.stars = stars;
+		this.review_count = review_count;
+		this.categories = categories;
+		this.id = id;
+
 	}
 
 	public String getCity() {
@@ -107,6 +107,14 @@ public class Restaurant implements Serializable {
 
 	public void setReview_count(Integer review_count) {
 		this.review_count = review_count;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public void setName(String name) {
+		this.business_name = name;
 	}
 
 
