@@ -18,6 +18,15 @@ public class User {
     private String password;
     private boolean authorized;
 
+    public User(String userName, String password, boolean authorized, Long id) {
+        this.userName = userName;
+        this.password =password;
+        this.authorized = authorized;
+        this.id = id;
+    }
+
+
+
 
     public long getId() {
         return id;
