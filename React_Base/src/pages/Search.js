@@ -1,189 +1,122 @@
+import { useState, useRef } from "react";
+import axios from "axios";
+import SearchResults from "../components/SearchResults";
 import React from "react";
-import { useState, useEffect } from "react";
-import Results from "./Results";
-import { useNavigate } from "react-router";
-import { Logger } from "../logger/logger";
+import Topbar from "../components/Topbar";
 
-const Search = (props) => {
-  const [search, setSearch] = useState("");
-  const [results, setResults] = useState(null);
-  const [searchBy, setSearchBy] = useState("businessName");
-  const [database, setDatabase] = useState("");
-  const [message, setMessage] = useState("");
-  const navigate = useNavigate();
-  const logger = new Logger();
+function SearchPage() {
+  const [searchResults, setSearchResults] = useState(false);
+  const searchRef = useRef();
+  const databaseRef = useRef();
 
-  const logSearch = async () => {
-    // setMessage(logger.create(props.user, search, database, new Date()));
-    console.log(message);
-    await fetch("http://localhost:5000/log", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(message),
-    }).catch((error) => {
-      window.alert(error);
-      return;
-    });
-  };
-
-  // functions for searches
-  const handleSearchMongo = async () => {
-    setResults(null);
-    const response = await fetch(
-      `http://localhost:5000/search/${searchBy}/${search}`
-    );
-    if (!response.ok) {
-      const message = `An error occurred: ${response.statusText}`;
-      console.log(message);
-      return;
-    }
-    const results = await response.json();
-    console.log(results);
-    setResults(results);
-    setSearch("");
-    navigate("/search");
-  };
-
-  const handleSearchPostgres = async () => {
-    setResults(null);
-    const response = await fetch(
-      `http://localhost:5000/search/${database}/${search}`
-    );
-    if (!response.ok) {
-      const message = `An error occurred: ${response.statusText}`;
-      console.log(message);
-      return;
-    }
-    const results = await response.json();
-    console.log(results);
-    setResults(results);
-    setSearch("");
-    navigate("/search");
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const searchValue = searchRef.current.value;
+    const databaseValue = databaseRef.current.value;
 
-    console.log(search);
-    console.log(searchBy);
-    console.log(database);
-    if (database === "postgres") {
-      handleSearchPostgres();
-      setMessage(logger.create(props.user, search, database, new Date()));
+    if (databaseValue === "business_id") {
+      const res = await axios.get(
+        `http://localhost:8080/business/${searchValue}`
+      );
+
+      const businessData = [];
+      businessData.push(res.data);
+      console.log(businessData);
+      setSearchResults(businessData);
     }
-    handleSearchMongo();
-    setMessage(logger.create(props.user, search, database, new Date()));
+
+    if (databaseValue === "business_name") {
+      const res = await axios.get(
+        `http://localhost:8080/business/search/findByBusiness_name?business_name=${searchValue}`
+      );
+      const businessData = res.data._embedded.business;
+      console.log(businessData);
+      setSearchResults(businessData);
+    }
+
+    if (databaseValue === "city") {
+      const res = await axios.get(
+        `http://localhost:8080/business/search/findByCity?city=${searchValue}`
+      );
+      const businessData = res.data._embedded.business;
+      console.log(businessData);
+      setSearchResults(businessData);
+    }
+
+
+
+    if (databaseValue === "address") {
+      const res = await axios.get(
+        `http://localhost:8080/business/search/findByAddress?address=${searchValue.replace(
+          " ",
+          "%20"
+        )}`
+      );
+      const businessData = res.data._embedded.business;
+      console.log(businessData);
+      setSearchResults(businessData);
+    }
+
+    if (databaseValue === "city") {
+      const res = await axios.get(
+        `http://localhost:8080/business/search/findByCity?city=${searchValue.replace(
+          " ",
+          "%20"
+        )}`
+      );
+      const businessData = res.data._embedded.business;
+      console.log(businessData);
+      setSearchResults(businessData);
+    }
+
+    if (databaseValue === "categories") {
+      const res = await axios.get(
+        `http://localhost:8080/business/search/findByCategories?country=${searchValue.replace(
+          " ",
+          "%20"
+        )}`
+      );
+      const businessData = res.data._embedded.business;
+      console.log(businessData);
+      setSearchResults(businessData);
+    }
+
+    if (databaseValue === "accountBalance") {
+      const res = await axios.get(
+        `http://localhost:8080/business/search/findByStars?stars=${searchValue}`
+      );
+      const businessData = res.data._embedded.business;
+      console.log(businessData)
+      setSearchResults(businessData)
+    }
   };
-
-  // a useEffect to ensure a use is logged in, if not redirect to login page
-  useEffect(() => {
-    if (!props.isLoggedIn) {
-      navigate("/");
-    }
-  }, []);
-
-  // a use effect to log the search when the message is set
-  useEffect(() => {
-    if (message !== "") {
-      logSearch();
-    }
-  }, [message]);
-
-  const searchHistory = async (e) => {
-    e.preventDefault();
-    setDatabase("");
-    const response = await fetch(`http://localhost:5000/log/${props.user}`);
-    if (!response.ok) {
-      const message = `An error occurred: ${response.statusText}`;
-      console.log(message);
-      return;
-    }
-    const results = await response.json();
-    console.log(results);
-    setResults(results);
-  };
-
   return (
     <div>
-      <h1>Search</h1>
-      <form id="searchForm" onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="radio"
-            name="database"
-            value="mongo"
-            onChange={(e) => setDatabase(e.target.value)}
-          />
-          <label>Mongo</label>
-          <input
-            type="radio"
-            name="database"
-            value="postgres"
-            onChange={(e) => setDatabase(e.target.value)}
-          />
-          <label>PostgreSQL</label>
-        </div>
-        <br />
-        {database === "mongo" ? (
-          <div>
-            <label>
-              <input
-                type="radio"
-                name="searchBy"
-                value="businessName"
-                onChange={(e) => setSearchBy(e.target.value)}
-              />
-              Business Name
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="searchBy"
-                value="city"
-                onChange={(e) => setSearchBy(e.target.value)}
-              />
-              City
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="searchBy"
-                value="partial"
-                onChange={(e) => setSearchBy(e.target.value)}
-              />
-              Partial Text Search
-            </label>
-            <br />
-          </div>
-        ) : null}
-        <br />
+      <Topbar />
+      <form className="search-box" onSubmit={handleSubmit}>
         <input
-            id="submit"
           type="text"
-          placeholder="Search"
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <br />
-        {/* <input type="submit" value="Submit Search" onSubmit={handleSubmit}/> */}
-        <button id="submit" type="submit">
-          Submit Search
-        </button>
+          className="search"
+          placeholder="Search database"
+          ref={searchRef}
+        ></input>
+          <option value="business_id">id</option>
+          <option value="business_name">Business Name</option>
+          <option value="city">City</option>
+          <option value="address">Address</option>
+          <option value="categories">Categories</option>
+          <option value="stars">Stars</option>
+          <option value="review_count">Address</option>
+        </select>
+        <button className="submit">Search</button>
       </form>
-      <br />
-      <form onSubmit={searchHistory}>
-        <button id="submit" type="submit">
-          Search History
-        </button>
-      </form>
-      {results ? (
-        <div>
-          {<Results results={results} database={database} user={props.user} />}
-        </div>
-      ) : null}
+      {searchResults ? (
+        <SearchResults searchResults={searchResults} />
+      ) : (
+        "nodata"
+      )}
     </div>
   );
-};
+}
 
-export default Search;
+export default SearchPage;

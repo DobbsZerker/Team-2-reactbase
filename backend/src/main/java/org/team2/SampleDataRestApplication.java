@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.example.data.jpa;
+package org.team2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
