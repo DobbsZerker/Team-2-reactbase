@@ -1,4 +1,4 @@
-package org.example.data.jpa.domain;
+package org.team2.domain;
 
 
 import javax.persistence.Entity;

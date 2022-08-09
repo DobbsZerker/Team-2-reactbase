@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.example.data.jpa.domain;
+package org.team2.domain;
 
 import java.io.Serializable;
 
@@ -37,39 +37,92 @@ public class Restaurant implements Serializable {
 
 	@ManyToOne(optional = false)
 	@NaturalId
-	private City city;
+	private String city;
 
 	@Column(nullable = false)
 	@NaturalId
-	private String name;
+	private String business_name;
+
+
 
 	@Column(nullable = false)
 	private String address;
 
+
 	@Column(nullable = false)
-	private String zip;
+	private String categories;
+
+	@Column(nullable = false)
+	private Integer review_count ;
+
+
+
+	@Column(nullable = false)
+	private Integer stars;
 
 	protected Restaurant() {
 	}
 
-	public Restaurant(City city, String name) {
+	public void setCity(String city) {
 		this.city = city;
-		this.name = name;
 	}
 
-	public City getCity() {
+	public void setName(String name) {
+		this.business_name = name;
+	}
+
+
+
+	public Restaurant(String city, String name) {
+		this.city = city;
+		this.business_name = name;
+	}
+
+	public String getCity() {
 		return this.city;
 	}
 
 	public String getName() {
-		return this.name;
+		return this.business_name;
 	}
 
 	public String getAddress() {
 		return this.address;
 	}
 
-	public String getZip() {
-		return this.zip;
+	public void setAddress(String address) {
+		this.address = address;
 	}
+
+	public String getCategories() {
+		return this.categories;
+	}
+	public void setCategories(String categories) {
+		this.categories = categories;
+	}
+
+	public Integer getReview_count() {
+		return review_count;
+	}
+
+	public void setReview_count(Integer review_count) {
+		this.review_count = review_count;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Restaurant{" +
+				"id=" + id +
+				", city='" + city + '\'' +
+				", business_name='" + business_name + '\'' +
+				", address='" + address + '\'' +
+				", categories='" + categories + '\'' +
+				", review_count=" + review_count +
+				", stars=" + stars +
+				'}';
+	}
+
+
+
 }

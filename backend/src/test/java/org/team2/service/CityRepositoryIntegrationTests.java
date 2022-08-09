@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.example.data.jpa.service;
+package org.team2.service;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,8 +24,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import org.example.data.jpa.SampleDataRestApplication;
-import org.example.data.jpa.domain.City;
+import org.team2.SampleDataRestApplication;
 
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;

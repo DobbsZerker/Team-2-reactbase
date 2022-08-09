@@ -14,21 +14,16 @@
  * limitations under the License.
  */
 
-package org.example.data.jpa.service;
+package org.team2.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-import org.example.data.jpa.domain.City;
+import org.team2.domain.Restaurant;
 
-@RepositoryRestResource(collectionResourceRel = "citys", path = "cities")
-interface CityRepository extends PagingAndSortingRepository<City, Long> {
+@RepositoryRestResource(collectionResourceRel = "hotels", path = "hotels")
+interface HotelRepository extends PagingAndSortingRepository<Restaurant, Long> {
 
-	Page<City> findByNameContainingAndCountryContainingAllIgnoringCase(String name,
-			String country, Pageable pageable);
-
-	City findByNameAndCountryAllIgnoringCase(String name, String country);
+	Restaurant findByCityAndName(City city, String name);
 
 }
