@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.example.data.jpa;
+package org.team2;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.example.data.jpa.service;
+package org.team2.service;
 
 import java.io.Serializable;
 
