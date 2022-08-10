@@ -26,6 +26,8 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.NaturalId;
 
+@Autowired
+RestaurantRepo restaurantRepo;
 @Entity
 public class Restaurant implements Serializable {
 
