@@ -13,6 +13,4 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
     public List<User> FindPassword(@Param("password")String password);
 
-    public List<User> FindAuthorized(@Param("isAuthorized")String isAuthorized);
-
 }

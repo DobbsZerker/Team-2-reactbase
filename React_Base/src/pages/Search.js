@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import axios from "axios";
 import SearchResults from "../components/SearchResults";
 import React from "react";
-import Topbar from "../components/Topbar";
 
 function SearchPage() {
   const [searchResults, setSearchResults] = useState(false);
