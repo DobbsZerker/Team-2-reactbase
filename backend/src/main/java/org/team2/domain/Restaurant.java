@@ -40,7 +40,7 @@ public class Restaurant implements Serializable {
 	private String categories;
 
 	@Column(nullable = false)
-	private Integer review_count ;
+	private Integer review_count;
 
 
 
