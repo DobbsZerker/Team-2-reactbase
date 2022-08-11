@@ -22,13 +22,13 @@ public class Restaurant implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-
+	@ManyToOne(optional = false)
 	@NaturalId
 	private String city;
 
 	@Column(nullable = false)
 	@NaturalId
-	private String businessName;
+	private String business_name;
 
 
 
@@ -40,7 +40,7 @@ public class Restaurant implements Serializable {
 	private String categories;
 
 	@Column(nullable = false)
-	private Integer reviewCount ;
+	private Integer review_count ;
 
 
 
@@ -54,12 +54,12 @@ public class Restaurant implements Serializable {
 
 
 
-	public Restaurant(String city, String name, Integer stars, Integer reviewCount, String categories, String address, Long id) {
+	public Restaurant(String city, String name, Integer stars, Integer review_count, String categories, String address, Long id) {
 		this.city = city;
-		this.businessName = name;
+		this.business_name = name;
 		this.address = address;
 		this.stars = stars;
-		this.reviewCount = reviewCount;
+		this.review_count = review_count;
 		this.categories = categories;
 		this.id = id;
 
@@ -70,7 +70,7 @@ public class Restaurant implements Serializable {
 	}
 
 	public String getName() {
-		return this.businessName;
+		return this.business_name;
 	}
 
 	public String getAddress() {
@@ -89,11 +89,11 @@ public class Restaurant implements Serializable {
 	}
 
 	public Integer getReview_count() {
-		return reviewCount;
+		return review_count;
 	}
 
 	public void setReview_count(Integer review_count) {
-		this.reviewCount = review_count;
+		this.review_count = review_count;
 	}
 
 	public void setCity(String city) {
@@ -101,7 +101,7 @@ public class Restaurant implements Serializable {
 	}
 
 	public void setName(String name) {
-		this.businessName = name;
+		this.business_name = name;
 	}
 
 
@@ -110,10 +110,10 @@ public class Restaurant implements Serializable {
 		return "Restaurant{" +
 				"id=" + id +
 				", city='" + city + '\'' +
-				", business_name='" + businessName + '\'' +
+				", business_name='" + business_name + '\'' +
 				", address='" + address + '\'' +
 				", categories='" + categories + '\'' +
-				", review_count=" + reviewCount +
+				", review_count=" + review_count +
 				", stars=" + stars +
 				'}';
 	}
