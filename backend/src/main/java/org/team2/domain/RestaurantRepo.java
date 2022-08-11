@@ -13,12 +13,11 @@ import java.util.List;
     public interface RestaurantRepo extends JpaRepository<Restaurant, Long> {
 
 
-        List<Restaurant> FindRestaurant(@Param("restaurant")String restaurant);
+        List<Restaurant> findRestaurantByBusinessName(@Param("restaurant")String restaurant);
         List<Restaurant> findByAddress(@Param("address") String address);
-        List<Restaurant> FindCity(@Param("city")String city);
+        List<Restaurant> findByCity(@Param("city")String city);
         List<Restaurant> findByStars(@Param("stars") String stars);
-        List<Restaurant> findByReviewCount(@Param("review_count") String review_count);
+        List<Restaurant> findByReviewCount(@Param("reviewCount") String review_count);
         List<Restaurant> findByCategories(@Param("categories") String categories);
-
 
 }

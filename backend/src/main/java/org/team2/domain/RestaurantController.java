@@ -27,7 +27,7 @@ public class RestaurantController {
    @PostMapping("/restaurant/search")
     public List<Restaurant> search(@RequestBody Map<String, String> body){
        String searchTerm = body.get("text");
-       return restaurantRepo.FindRestaurant(searchTerm);
+       return restaurantRepo.findRestaurantByBusinessName(searchTerm);
    }
 
 
