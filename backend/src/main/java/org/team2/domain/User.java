@@ -1,64 +1,73 @@
-//package org.team2.domain;
-//
-//
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
-//
-//@Entity
-//public class User {
-//
-//
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private long id;
-//
-//    private String userName;
-//    private String password;
-//    private boolean authorized;
-//
-//    public User() {
-//    }
-//
-//    public User(String userName, String password, boolean authorized, Long id) {
-//        this.userName = userName;
-//        this.password =password;
-//        this.authorized = authorized;
-//        this.id = id;
-//    }
-//
-//
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
-//
-//    public String getUsername() {
-//        return userName;
-//    }
-//
-//    public void setUsername(String username) {
-//        this.userName = username;
-//    }
-//
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
-//
-//    public boolean isAuthorized() {
-//        return authorized;
-//    }
-//
-//    public void setAuthorized(boolean authorized) {
-//        this.authorized = authorized;
-//    }
-//}
+package org.team2.domain;
+
+
+import javax.persistence.*;
+import java.io.Serializable;
+import org.hibernate.annotations.NaturalId;
+@Entity
+@Table(name = "user")
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue
+    private Integer id;
+    @NaturalId
+    private String username;
+    private String password;
+    private Boolean authorized;
+
+    protected User() {
+    }
+
+    public User(String username, String password, Boolean authorized, Integer id) {
+        this.username = username;
+        this.password =password;
+        this.authorized = authorized;
+        this.id = id;
+    }
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean isAuthorized() {
+        return authorized;
+    }
+
+    public void setAuthorized(Boolean authorized) {
+        this.authorized = authorized;
+    }
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", authroized='" + authorized + '\'' +
+                '}';
+    }
+}
 
