@@ -13,9 +13,9 @@ function SearchPage() {
     const searchValue = searchRef.current.value;
     const databaseValue = databaseRef.current.value;
 
-    if (databaseValue === "business_id") {
+    if (databaseValue === "businessId") {
       const res = await axios.get(
-        `http://localhost:8080/business/${searchValue}`
+        `http://localhost:8080/restaurants/${searchValue}`
       );
 
       const businessData = [];
@@ -24,9 +24,9 @@ function SearchPage() {
       setSearchResults(businessData);
     }
 
-    if (databaseValue === "business_name") {
+    if (databaseValue === "businessName") {
       const res = await axios.get(
-        `http://localhost:8080/business/search/findByBusiness_name?business_name=${searchValue}`
+        `http://localhost:8080/restaurants/search/findByBusinessName?business_name=${searchValue}`
       );
       const businessData = res.data._embedded.business;
       console.log(businessData);
@@ -99,13 +99,13 @@ function SearchPage() {
           placeholder="Search database"
           ref={searchRef}
         ></input>
-          <option value="business_id">id</option>
-          <option value="business_name">Business Name</option>
+          <option value="businessId">id</option>
+          <option value="businessName">Business Name</option>
           <option value="city">City</option>
           <option value="address">Address</option>
           <option value="categories">Categories</option>
           <option value="stars">Stars</option>
-          <option value="review_count">Address</option>
+          <option value="reviewCount">Address</option>
         </select>
         <button className="submit">Search</button>
       </form>
