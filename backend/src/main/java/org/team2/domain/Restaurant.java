@@ -3,49 +3,41 @@ package org.team2.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import org.hibernate.annotations.NaturalId;
-
+//import org.hibernate.annotations.Table;
 
 
 @Entity
+@Table(name = "business")
 public class Restaurant implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Long businessId;
 
-	@ManyToOne(optional = false)
+
 	@NaturalId
 	private String city;
 
-	@Column(nullable = false)
 	@NaturalId
-	private String business_name;
+	private String businessName;
 
 
 
-	@Column(nullable = false)
+
 	private String address;
 
-
-	@Column(nullable = false)
 	private String categories;
 
-	@Column(nullable = false)
-	private Integer review_count;
+	private Integer reviewCount ;
 
-
-
-	@Column(nullable = false)
 	private Integer stars;
+
+
 
 	protected Restaurant() {
 	}
@@ -54,14 +46,14 @@ public class Restaurant implements Serializable {
 
 
 
-	public Restaurant(String city, String name, Integer stars, Integer review_count, String categories, String address, Long id) {
+	public Restaurant(String city, String name, Integer stars, Integer reviewCount, String categories, String address, Long id) {
 		this.city = city;
-		this.business_name = name;
+		this.businessName = name;
 		this.address = address;
 		this.stars = stars;
-		this.review_count = review_count;
+		this.reviewCount = reviewCount;
 		this.categories = categories;
-		this.id = id;
+		this.businessId = id;
 
 	}
 
@@ -70,16 +62,24 @@ public class Restaurant implements Serializable {
 	}
 
 	public String getName() {
-		return this.business_name;
+		return this.businessName;
 	}
 
 	public String getAddress() {
 		return this.address;
 	}
 
+	public Integer getStars() {
+		return this.stars;
+	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public void setStars(Integer stars) {
+		this.stars= stars;
+	}
+
 
 	public String getCategories() {
 		return this.categories;
@@ -88,12 +88,12 @@ public class Restaurant implements Serializable {
 		this.categories = categories;
 	}
 
-	public Integer getReview_count() {
-		return review_count;
+	public Integer getReviewCount() {
+		return reviewCount;
 	}
 
-	public void setReview_count(Integer review_count) {
-		this.review_count = review_count;
+	public void setReviewCount(Integer reviewCount) {
+		this.reviewCount = reviewCount;
 	}
 
 	public void setCity(String city) {
@@ -101,19 +101,19 @@ public class Restaurant implements Serializable {
 	}
 
 	public void setName(String name) {
-		this.business_name = name;
+		this.businessName = name;
 	}
 
 
 	@Override
 	public String toString() {
 		return "Restaurant{" +
-				"id=" + id +
+				"id=" + businessId +
 				", city='" + city + '\'' +
-				", business_name='" + business_name + '\'' +
+				", business_name='" + businessName + '\'' +
 				", address='" + address + '\'' +
 				", categories='" + categories + '\'' +
-				", review_count=" + review_count +
+				", review_count=" + reviewCount +
 				", stars=" + stars +
 				'}';
 	}
