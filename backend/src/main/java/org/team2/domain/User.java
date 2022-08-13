@@ -6,26 +6,27 @@ import java.io.Serializable;
 import org.hibernate.annotations.NaturalId;
 @Entity
 @Table(name = "user")
-public class User implements Serializable {
+public class User {
 
-    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NaturalId
+    @Column(length = 255, nullable = false, name="username")
     private String username;
+    @Column(length = 255, nullable = false, name="password")
     private String password;
+    @Column(length = 255, nullable = false, name="authorized")
     private Boolean authorized;
 
-    protected User() {
-    }
 
-    public User(String username, String password, Boolean authorized, Integer id) {
-        this.username = username;
-        this.password =password;
-        this.authorized = authorized;
-        this.id = id;
-    }
+
+//    public User(String username, String password, Boolean authorized, Integer id) {
+//        this.username = username;
+//        this.password =password;
+//        this.authorized = authorized;
+//        this.id = id;
+//    }
+
 
 
     public Integer getId() {
@@ -66,8 +67,7 @@ public class User implements Serializable {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", authroized='" + authorized + '\'' +
+                ", authorized='" + authorized + '\'' +
                 '}';
     }
 }
-
