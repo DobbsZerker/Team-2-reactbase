@@ -74,6 +74,16 @@ public String saveUser(User user){
             return "saved";
 }
 
+    @PostMapping("/user/register")
+    public Iterable<User> registerUser(@RequestBody User newUser) {
+        Iterable<User> users = userRepo.findAll();
+        System.out.println("New user: " + newUser.toString());
+        userRepo.save(newUser);
+        return users;
+    }
+
+
+
 //    @PutMapping(path="/adduser")
 //    public @ResponseBody List<User> addUser(@Param(value = "userName") String username, @Param(value = "password") String password, @Param(value = "id") Integer id, @Param(value = "authorized") Boolean authorized){
 //
