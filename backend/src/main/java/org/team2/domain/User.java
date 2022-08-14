@@ -2,15 +2,14 @@ package org.team2.domain;
 
 
 import javax.persistence.*;
-import java.io.Serializable;
-import org.hibernate.annotations.NaturalId;
+
 @Entity
 @Table(name = "user")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "id")
+    private Long id;
     @Column(length = 255, nullable = false, name="username")
     private String username;
     @Column(length = 255, nullable = false, name="password")
@@ -19,21 +18,30 @@ public class User {
     private Boolean authorized;
 
 
+    public User() {
 
-//    public User(String username, String password, Boolean authorized, Integer id) {
-//        this.username = username;
-//        this.password =password;
-//        this.authorized = authorized;
-//        this.id = id;
+    }
+
+    public User(String username, String password, Boolean authorized, Long id) {
+        this.username = username;
+        this.password = password;
+        this.authorized = authorized;
+        this.id = id;
+    }
+
+
+//    public User() {
+//
 //    }
 
 
 
-    public Integer getId() {
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

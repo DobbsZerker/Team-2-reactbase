@@ -3,11 +3,16 @@ package org.team2.domain;
 
 
 import org.springframework.data.repository.CrudRepository;
-import org.team2.domain.User;
-import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface UserRepo extends CrudRepository<User, Long> {
 
-    User findByUsername(String username);
+    Optional<User> findById(Long id);
+
+//    List<User> User(String username, String password, Integer id, Boolean authorized);
+
+
 }
 
