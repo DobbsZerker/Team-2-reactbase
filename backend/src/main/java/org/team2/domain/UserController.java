@@ -52,7 +52,9 @@ private UserRepo userRepo;
 
 
     @GetMapping("/user")
+
     public List<User> showUserList(Model model){
+
         List<User> listUsers = service.listAll();
         model.addAttribute("listUsers", listUsers);
         return listUsers;

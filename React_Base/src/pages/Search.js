@@ -16,7 +16,7 @@ function SearchPage() {
 
     if (databaseValue === "business_id") {
       const res = await axios.get(
-        `http://localhost:8080/restaurants/${searchValue}`
+        `http://localhost:8080/restaurant/${searchValue}`
       );
 
       const businessData = [];
@@ -27,7 +27,7 @@ function SearchPage() {
 
     if (databaseValue === "business_name") {
       const res = await axios.get(
-        `http://localhost:8080/restaurants/search/findByBusinessName?business_name=${searchValue}`
+        `http://localhost:8080/restaurant/search/findByBusinessName?business_name=${searchValue}`
       );
       const businessData = res.data._embedded.business;
       console.log(businessData);
@@ -36,7 +36,7 @@ function SearchPage() {
 
     if (databaseValue === "city") {
       const res = await axios.get(
-        `http://localhost:8080/restaurants/search/findByCity?city=${searchValue}`
+        `http://localhost:8080/restaurant/search/findByCity?city=${searchValue}`
       );
       const businessData = res.data._embedded.business;
       console.log(businessData);
@@ -47,7 +47,7 @@ function SearchPage() {
 
     if (databaseValue === "address") {
       const res = await axios.get(
-        `http://localhost:8080/restaurants/search/findByAddress?address=${searchValue.replace(
+        `http://localhost:8080/restaurant/search/findByAddress?address=${searchValue.replace(
           " ",
           "%20"
         )}`
@@ -59,7 +59,7 @@ function SearchPage() {
 
     if (databaseValue === "city") {
       const res = await axios.get(
-        `http://localhost:8080/restaurants/search/findByCity?city=${searchValue.replace(
+        `http://localhost:8080/restaurant/search/findByCity?city=${searchValue.replace(
           " ",
           "%20"
         )}`
@@ -71,7 +71,7 @@ function SearchPage() {
 
     if (databaseValue === "categories") {
       const res = await axios.get(
-        `http://localhost:8080/restaurants/search/findByCategories?country=${searchValue.replace(
+        `http://localhost:8080/restaurant/search/findByCategories?country=${searchValue.replace(
           " ",
           "%20"
         )}`

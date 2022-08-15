@@ -22,12 +22,12 @@ public class UserService {
         repo.save(user);
     }
 
-    public User get(Integer id) throws UserNotFoundException{
-       Optional<User> result = repo.findById(Long.valueOf(id));
-       if (result.isPresent()){
-           return result.get();
-       }
-       throw new UserNotFoundException("no id found");
-
-    }
+//    public User get(Integer id) throws UserNotFoundException{
+//       Optional<User> result = repo.findById(Long.valueOf(id));
+//       if (result.isPresent()){
+//           return result.get();
+//       }
+//       throw new UserNotFoundException("no id found");
+//
+//    }
 }

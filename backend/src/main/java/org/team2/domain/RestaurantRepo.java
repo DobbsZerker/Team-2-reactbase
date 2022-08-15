@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @CrossOrigin
-@RepositoryRestResource(collectionResourceRel = "user", path = "user")
+@RepositoryRestResource(collectionResourceRel = "restaurant", path = "restaurant")
 
 public interface RestaurantRepo extends CrudRepository<Restaurant, Long> {
 
