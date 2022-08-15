@@ -6,32 +6,35 @@ import { useNavigate } from "react-router-dom";
 //import bcrypt from "bcryptjs";
 
 const Register = () => {
-  const [userName, setUserName] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [passConfirm, setPassConfirm] = useState("");
+  const [id, setId] = useState("");
+  const [authorized, isAuthorized] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   class User {
-    constructor(userName, password) {
-      this.userName = userName;
+    constructor(username, password) {
+      this.username = username;
       this.password = password;
+      this.authorized = authorized;
+      this.id = id;
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    if (userName === "" || password === "" || passConfirm === "") {
+    if (username === "" || password === "" || passConfirm === "") {
       setError("Please enter a username and password");
     } else if (password !== passConfirm) {
       setError("Passwords do not match");
     } else {
       setError(null);
-      let user = new User(userName, password);
+      let user = new User(username, password);
       // bcrypt.hash(user.password, 10, (err, hash) => {})
       // ^^ this is where i would encode the password, unless server side encryption becomes my chosen solution
-      await fetch("http://localhost:5000/users/add", {
+      await fetch("http://localhost:8080/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,9 +45,9 @@ const Register = () => {
         return;
       });
       window.alert("User created, returning to login");
-      setUserName("");
+      setUsername("");
       setPassword("");
-      setPassConfirm("");
+      isAuthorized(True);
       navigate("/");
     }
   };

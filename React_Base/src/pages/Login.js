@@ -7,10 +7,11 @@ import { useNavigate } from "react-router-dom";
 const Login = (props) => {
   // a useState to store the user object on successful login will be required
   // ^^ will also need to be passed forward to the search page
-  const [userName, setUserName] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
 
   //a use effect to ensure the user object is reset to null on returning to the login page
   useEffect(() => {
@@ -25,14 +26,17 @@ const Login = (props) => {
     // testing comments
     //console.log(userName);
     // console.log(password);
-    if (userName === "" || password === "") {
+    if (username === "" || password === "") {
       setError("Please enter a username and password");
       return
     }
+
     // code to send value to server to check if user exists
 
-    await fetch(`http://localhost:5000/users/${userName}`, {
+
+    await fetch(`http://localhost:8080/user/search/findByUsername?username=${username}`, {
       method: "GET",
+
       headers: {
         "Content-Type": "application/json",
       },
@@ -56,7 +60,7 @@ const Login = (props) => {
         if (data.password === password) {
           //console.log("password is correct");
           // if user exists and passwords match, set user object to the user object
-          props.setUser(userName);
+          props.setUser(username);
           props.setIsLoggedIn(true);
           navigate("/search");
         } else {
@@ -67,6 +71,8 @@ const Login = (props) => {
         setError("User does not exist");
         return;
       });
+
+
 
     // early testing code for ensuring React was working
     // props.setUser(userName);
@@ -84,8 +90,8 @@ const Login = (props) => {
         <input
           type="text"
           name="username"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <br />
         <label>Password:</label>

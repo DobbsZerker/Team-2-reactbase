@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import axios from "axios";
 import SearchResults from "../components/SearchResults";
 import React from "react";
+import Topbar from "../components/Topbar";
 
 function SearchPage() {
   const [searchResults, setSearchResults] = useState(false);
@@ -13,9 +14,9 @@ function SearchPage() {
     const searchValue = searchRef.current.value;
     const databaseValue = databaseRef.current.value;
 
-    if (databaseValue === "businessId") {
+    if (databaseValue === "business_id") {
       const res = await axios.get(
-        `http://localhost:8080/restaurants/${searchValue}`
+        `http://localhost:8080/restaurant/${searchValue}`
       );
 
       const businessData = [];
@@ -24,9 +25,9 @@ function SearchPage() {
       setSearchResults(businessData);
     }
 
-    if (databaseValue === "businessName") {
+    if (databaseValue === "business_name") {
       const res = await axios.get(
-        `http://localhost:8080/restaurants/search/findByBusinessName?business_name=${searchValue}`
+        `http://localhost:8080/restaurant/search/findByBusinessName?business_name=${searchValue}`
       );
       const businessData = res.data._embedded.business;
       console.log(businessData);
@@ -35,7 +36,7 @@ function SearchPage() {
 
     if (databaseValue === "city") {
       const res = await axios.get(
-        `http://localhost:8080/business/search/findByCity?city=${searchValue}`
+        `http://localhost:8080/restaurant/search/findByCity?city=${searchValue}`
       );
       const businessData = res.data._embedded.business;
       console.log(businessData);
@@ -46,7 +47,7 @@ function SearchPage() {
 
     if (databaseValue === "address") {
       const res = await axios.get(
-        `http://localhost:8080/business/search/findByAddress?address=${searchValue.replace(
+        `http://localhost:8080/restaurant/search/findByAddress?address=${searchValue.replace(
           " ",
           "%20"
         )}`
@@ -58,7 +59,7 @@ function SearchPage() {
 
     if (databaseValue === "city") {
       const res = await axios.get(
-        `http://localhost:8080/business/search/findByCity?city=${searchValue.replace(
+        `http://localhost:8080/restaurant/search/findByCity?city=${searchValue.replace(
           " ",
           "%20"
         )}`
@@ -70,7 +71,7 @@ function SearchPage() {
 
     if (databaseValue === "categories") {
       const res = await axios.get(
-        `http://localhost:8080/business/search/findByCategories?country=${searchValue.replace(
+        `http://localhost:8080/restaurant/search/findByCategories?country=${searchValue.replace(
           " ",
           "%20"
         )}`
@@ -80,14 +81,6 @@ function SearchPage() {
       setSearchResults(businessData);
     }
 
-    if (databaseValue === "accountBalance") {
-      const res = await axios.get(
-        `http://localhost:8080/business/search/findByStars?stars=${searchValue}`
-      );
-      const businessData = res.data._embedded.business;
-      console.log(businessData)
-      setSearchResults(businessData)
-    }
   };
   return (
     <div>
@@ -99,13 +92,15 @@ function SearchPage() {
           placeholder="Search database"
           ref={searchRef}
         ></input>
-          <option value="businessId">id</option>
-          <option value="businessName">Business Name</option>
-          <option value="city">City</option>
-          <option value="address">Address</option>
-          <option value="categories">Categories</option>
-          <option value="stars">Stars</option>
-          <option value="reviewCount">Address</option>
+        <select name="dropdown" id="database" ref={databaseRef}>
+          <option value="business_id">id</option>
+          <option value="business_name">First Name</option>
+          <option value="city">Last Name</option>
+          <option value="address">Email</option>
+          <option value="categoriesr">Phone Number</option>
+          <option value="stars">Address</option>
+          <option value="review_count">City</option>
+
         </select>
         <button className="submit">Search</button>
       </form>
