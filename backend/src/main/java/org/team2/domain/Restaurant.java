@@ -10,14 +10,14 @@ import org.hibernate.annotations.NaturalId;
 
 
 @Entity
-@Table(name = "business")
+@Table(name = "restaurant")
 public class Restaurant implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
-	private Long businessId;
+	private Integer businessId;
 
 
 	@NaturalId
@@ -46,14 +46,15 @@ public class Restaurant implements Serializable {
 
 
 
-	public Restaurant(String city, String name, Integer stars, Integer reviewCount, String categories, String address, Long id) {
-		this.city = city;
+	public Restaurant(String city, String name, Integer stars, Integer reviewCount, String categories, String address, Integer id) {
+		this.businessId = id;
 		this.businessName = name;
+		this.city = city;
 		this.address = address;
+		this.categories = categories;
 		this.stars = stars;
 		this.reviewCount = reviewCount;
-		this.categories = categories;
-		this.businessId = id;
+
 
 	}
 
