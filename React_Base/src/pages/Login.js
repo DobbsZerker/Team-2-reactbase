@@ -32,19 +32,18 @@ const Login = (props) => {
     }
 
     // code to send value to server to check if user exists
-
-
     await fetch(`http://localhost:8080/user/search/findByUsername?username=${username}`, {
       method: "GET",
 
       headers: {
         "Content-Type": "application/json",
+        "mode": "cors",
+        "Access-Control-Allow-Origin": "*",
       },
     })
       .then((response) => {
+//      console.log(response)
         if (response.status === 200) {
-          // console.log(response);
-          //console.log(response.json())
           return response.json();
         } else {
           setError("User does not exist");
@@ -56,8 +55,15 @@ const Login = (props) => {
         return;
       })
       .then((data) => {
-        //console.log(data);
-        if (data.password === password) {
+        console.log(data);
+        console.log(data._embedded.user)
+        const user = data._embedded.user
+        console.log(user[0].password)
+
+//        console.log(data[0]);
+//        console.log(data[0].username);
+//        console.log(data[0].password);
+        if (user[0].password === password) {
           //console.log("password is correct");
           // if user exists and passwords match, set user object to the user object
           props.setUser(username);

@@ -4,7 +4,7 @@ import SearchResults from "../components/SearchResults";
 import React from "react";
 import Topbar from "../components/Topbar";
 
-function SearchPage() {
+function Search() {
   const [searchResults, setSearchResults] = useState(false);
   const searchRef = useRef();
   const databaseRef = useRef();
@@ -27,18 +27,27 @@ function SearchPage() {
 
     if (databaseValue === "business_name") {
       const res = await axios.get(
-        `http://localhost:8080/restaurant/search/findByBusinessName?business_name=${searchValue}`
+        `http://localhost:8080/restaurant/search/findByBusinessName?business_name=${searchValue.replace(
+                                                                                                          " ",
+                                                                                                          "%20"
+      )}`
       );
-      const businessData = res.data._embedded.business;
-      console.log(businessData);
-      setSearchResults(businessData);
+ const businessData = [];
+      businessData.push(res._embedded.restaurant)
+      console.log(businessData[0]);
+      setSearchResults(businessData[0])
     }
 
     if (databaseValue === "city") {
       const res = await axios.get(
-        `http://localhost:8080/restaurant/search/findByCity?city=${searchValue}`
-      );
-      const businessData = res.data._embedded.business;
+        `http://localhost:8080/restaurant/search/findByCity?city=${searchValue.replace(
+                                                                                         " ",
+                                                                                         "%20"
+       )}`
+       );
+      console.log(res)
+      console.log(res.data._embedded)
+      const businessData = res.data._embedded;
       console.log(businessData);
       setSearchResults(businessData);
     }
@@ -94,12 +103,12 @@ function SearchPage() {
         ></input>
         <select name="dropdown" id="database" ref={databaseRef}>
           <option value="business_id">id</option>
-          <option value="business_name">First Name</option>
-          <option value="city">Last Name</option>
-          <option value="address">Email</option>
-          <option value="categoriesr">Phone Number</option>
-          <option value="stars">Address</option>
-          <option value="review_count">City</option>
+          <option value="business_name">Business Name</option>
+          <option value="city">City</option>
+          <option value="address">Address</option>
+          <option value="categories">Categories</option>
+          <option value="stars">Stars</option>
+          <option value="review_count">Review Count</option>
 
         </select>
         <button className="submit">Search</button>
@@ -113,4 +122,4 @@ function SearchPage() {
   );
 }
 
-export default SearchPage;
+export default Search;

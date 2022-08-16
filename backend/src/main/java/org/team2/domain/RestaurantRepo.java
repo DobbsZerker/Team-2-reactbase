@@ -18,7 +18,7 @@ import java.util.List;
 
 public interface RestaurantRepo extends CrudRepository<Restaurant, Long> {
 
-    List<Restaurant> findByBusinessName(@Param("Business_name") String businessName);
+    List<Restaurant> findByBusinessName(@Param("business_name") String businessName);
     List<Restaurant> findByCity(@Param("city") String city);
     List<Restaurant> findByAddress(@Param("address") String address);
     List<Restaurant> findByStars(@Param("stars") Integer stars);
