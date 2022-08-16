@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [passConfirm, setPassConfirm] = useState("");
   const [id, setId] = useState("");
   const [authorized, isAuthorized] = useState("");
   const [error, setError] = useState("");
@@ -47,7 +48,7 @@ const Register = () => {
       window.alert("User created, returning to login");
       setUsername("");
       setPassword("");
-      isAuthorized(True);
+      isAuthorized("");
       navigate("/");
     }
   };
@@ -60,8 +61,8 @@ const Register = () => {
         <input
           type="text"
           name="username"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <br />
         <label>Password:</label>

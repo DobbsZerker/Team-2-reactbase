@@ -23,4 +23,6 @@ public interface RestaurantRepo extends CrudRepository<Restaurant, Long> {
     List<Restaurant> findByAddress(@Param("address") String address);
     List<Restaurant> findByStars(@Param("stars") Integer stars);
     List<Restaurant> findByReviewCount(@Param("reviewCount") Integer reviewCount);
+
+
 }

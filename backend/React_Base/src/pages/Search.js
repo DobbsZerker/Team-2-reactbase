@@ -29,7 +29,8 @@ function SearchPage() {
       const res = await axios.get(
         `http://localhost:8080/restaurant/search/findByBusinessName?business_name=${searchValue}`
       );
-      const businessData = res.data._embedded.business;
+      const businessData = [];
+      businessData.push(res.data);
       console.log(businessData);
       setSearchResults(businessData);
     }
@@ -38,7 +39,9 @@ function SearchPage() {
       const res = await axios.get(
         `http://localhost:8080/restaurant/search/findByCity?city=${searchValue}`
       );
-      const businessData = res.data._embedded.business;
+      console.log(res)
+      console.log(res.data._embedded)
+      const businessData = res.data._embedded;
       console.log(businessData);
       setSearchResults(businessData);
     }
@@ -94,12 +97,12 @@ function SearchPage() {
         ></input>
         <select name="dropdown" id="database" ref={databaseRef}>
           <option value="business_id">id</option>
-          <option value="business_name">First Name</option>
-          <option value="city">Last Name</option>
-          <option value="address">Email</option>
-          <option value="categoriesr">Phone Number</option>
-          <option value="stars">Address</option>
-          <option value="review_count">City</option>
+          <option value="business_name">Business Name</option>
+          <option value="city">City</option>
+          <option value="address">Address</option>
+          <option value="categories">Categories</option>
+          <option value="stars">Stars</option>
+          <option value="review_count">Review Count</option>
 
         </select>
         <button className="submit">Search</button>

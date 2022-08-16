@@ -2,11 +2,10 @@ package org.team2.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @Controller // This means that this class is a Controller
 @RequestMapping(path="/business") // This means URL's start with /demo (after Application path)
@@ -30,6 +29,30 @@ public class RestaurantController {
         restaurantRepo.save(n);
         return "Saved";
     }
+
+    @GetMapping("/restaurant/search/{business_name}")
+    public List<Restaurant> searchByBusinessName(@RequestParam(value = "business_name") String business_name){
+        return restaurantRepo.findByBusinessName(business_name);
+    }
+    @GetMapping("/restaurant/search/{city}")
+    public List<Restaurant> searchByCity(@RequestParam(value = "city") String city){
+        return restaurantRepo.findByCity(city);
+    }
+    @GetMapping("/restaurant/search/{address}")
+    public List<Restaurant> searchByAddress(@RequestParam(value = "address") String address){
+        return restaurantRepo.findByAddress(address);
+    }
+    @GetMapping("/restaurant/search/{stars}")
+    public List<Restaurant> searchByStars(@RequestParam(value = "stars") Integer stars){
+        return restaurantRepo.findByStars(stars);
+    }
+
+    @GetMapping("/restaurant/search/{review_count}")
+    public List<Restaurant> searchByReviewCount(@RequestParam(value = "reviewCount") Integer reviewCount){
+        return restaurantRepo.findByReviewCount(reviewCount);
+    }
+
+
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<Restaurant> getAllRestaurants() {

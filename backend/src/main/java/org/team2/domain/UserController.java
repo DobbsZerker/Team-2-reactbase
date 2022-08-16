@@ -69,6 +69,13 @@ public String showNewFor(Model model){
     }
 
 
+    @CrossOrigin
+    @GetMapping(value="/users/{username}", produces = "application/json")
+    public List<User> getUser(@RequestParam(value = "userName", defaultValue = "") String userName) {
+        return userRepo.findByUsername(userName);
+    }
+
+
 @PutMapping("/user/save")
 public String saveUser(User user){
     service.save(user);

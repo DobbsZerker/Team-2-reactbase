@@ -33,7 +33,7 @@ const Results = (props) => {
           console.log(result);
           return (
             <div>
-              <h2>{result.business_name}</h2>
+              <h2>{result.name}</h2>
               <p>
                 {`${result.city}`}
                 <br />
@@ -42,7 +42,7 @@ const Results = (props) => {
                 {result.categories}
                 <br />
                 {/* found an error this morning, fixed review_count to be displayed instead of .stars twice :) */}
-                {`Rated ${result.stars} stars across ${result.review_count} reviews.`}
+                {`Rated ${result.stars} stars across ${result.reviewCount} reviews.`}
                 <br />
               </p>
             </div>
@@ -59,7 +59,7 @@ const Results = (props) => {
           return (
             <div>
               <hr />
-              <h3>{result.name}</h3>
+              <h3>{result.business_name}</h3>
               <div>
                 {`${result.city}, ${result.state}`} <br />
                 {result.address}
