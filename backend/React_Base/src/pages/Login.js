@@ -56,7 +56,9 @@ const Login = (props) => {
         return;
       })
       .then((data) => {
-        //console.log(data);
+        data = response
+        console.log(data);
+        console.log(data.password);
         if (data.password === password) {
           //console.log("password is correct");
           // if user exists and passwords match, set user object to the user object
