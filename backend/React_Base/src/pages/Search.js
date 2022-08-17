@@ -33,8 +33,9 @@ function Search() {
       )}`
       );
  const businessData = [];
-      businessData.push(res._embedded.restaurant)
-      console.log(businessData[0]);
+      businessData.push(res.data._embedded.restaurant)
+      console.log(businessData);
+      console.log()
       setSearchResults(businessData[0])
     }
 
@@ -45,50 +46,56 @@ function Search() {
                                                                                          "%20"
        )}`
        );
-      console.log(res)
-      console.log(res.data._embedded)
-      const businessData = res.data._embedded;
-      console.log(businessData);
-      setSearchResults(businessData);
+      const businessData = [];
+            businessData.push(res.data._embedded.restaurant)
+            console.log(businessData);
+            console.log()
+            setSearchResults(businessData[0])
     }
 
 
 
-    if (databaseValue === "address") {
-      const res = await axios.get(
-        `http://localhost:8080/restaurant/search/findByAddress?address=${searchValue.replace(
-          " ",
-          "%20"
-        )}`
-      );
-      const businessData = res.data._embedded.business;
-      console.log(businessData);
-      setSearchResults(businessData);
-    }
-
-    if (databaseValue === "city") {
-      const res = await axios.get(
-        `http://localhost:8080/restaurant/search/findByCity?city=${searchValue.replace(
-          " ",
-          "%20"
-        )}`
-      );
-      const businessData = res.data._embedded.business;
-      console.log(businessData);
-      setSearchResults(businessData);
-    }
-
-    if (databaseValue === "categories") {
-      const res = await axios.get(
-        `http://localhost:8080/restaurant/search/findByCategories?country=${searchValue.replace(
-          " ",
-          "%20"
-        )}`
-      );
-      const businessData = res.data._embedded.business;
-      console.log(businessData);
-      setSearchResults(businessData);
-    }
+//    if (databaseValue === "address") {
+//      const res = await axios.get(
+//        `http://localhost:8080/restaurant/search/findByAddress?address=${searchValue.replace(
+//          " ",
+//          "%20"
+//        )}`
+//      );
+//      const businessData = [];
+//            businessData.push(res.data._embedded.restaurant)
+//            console.log(businessData);
+//            console.log()
+//            setSearchResults(businessData[0])
+//    }
+//
+//    if (databaseValue === "city") {
+//      const res = await axios.get(
+//        `http://localhost:8080/restaurant/search/findByCity?city=${searchValue.replace(
+//          " ",
+//          "%20"
+//        )}`
+//      );
+//      const businessData = [];
+//            businessData.push(res.data._embedded.restaurant)
+//            console.log(businessData);
+//            console.log()
+//            setSearchResults(businessData[0])
+//    }
+//
+//    if (databaseValue === "categories") {
+//      const res = await axios.get(
+//        `http://localhost:8080/restaurant/search/findByCategories?country=${searchValue.replace(
+//          " ",
+//          "%20"
+//        )}`
+//      );
+//      const businessData = [];
+//            businessData.push(res.data._embedded.restaurant)
+//            console.log(businessData);
+//            console.log()
+//            setSearchResults(businessData[0])
+//    }
 
   };
   return (
@@ -105,10 +112,7 @@ function Search() {
           <option value="business_id">id</option>
           <option value="business_name">Business Name</option>
           <option value="city">City</option>
-          <option value="address">Address</option>
-          <option value="categories">Categories</option>
-          <option value="stars">Stars</option>
-          <option value="review_count">Review Count</option>
+
 
         </select>
         <button className="submit">Search</button>
