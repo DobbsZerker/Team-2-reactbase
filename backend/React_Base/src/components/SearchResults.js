@@ -10,6 +10,9 @@ function SearchResults(searchResults) {
             <ul>
               <ul>
                 <li className="searchRestaurant">
+                  <b>name:</b> {result.name}
+                </li>
+                <li className="searchRestaurant">
                   <b>City:</b> {result.city}
                 </li>
                 <li className="searchRestaurant">
@@ -22,7 +25,7 @@ function SearchResults(searchResults) {
                   <b>stars:</b> {result.stars}
                 </li>
                 <li className="searchRestaurant">
-                  <b>Review Count:</b> {result.review_count}
+                  <b>Review Count:</b> {result.reviewCount}
                 </li>
               </ul>
             </ul>

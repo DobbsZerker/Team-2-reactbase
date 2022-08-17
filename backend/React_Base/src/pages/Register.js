@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [passConfirm, setPassConfirm] = useState("");
   const [id, setId] = useState("");
   const [authorized, isAuthorized] = useState("");
   const [error, setError] = useState("");
@@ -17,7 +18,7 @@ const Register = () => {
     constructor(username, password) {
       this.username = username;
       this.password = password;
-      this.authorized = authorized;
+      this.authorized = true;
       this.id = id;
     }
   }
@@ -34,20 +35,25 @@ const Register = () => {
       let user = new User(username, password);
       // bcrypt.hash(user.password, 10, (err, hash) => {})
       // ^^ this is where i would encode the password, unless server side encryption becomes my chosen solution
-      await fetch("http://localhost:8080/user/register", {
+      await fetch("http://localhost:8080/user/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "mode": "cors",
+          "Access-Control-Allow-Origin": "*",
         },
         body: JSON.stringify(user),
+
       }).catch((error) => {
         window.alert(error);
+        console.log(user);
+
         return;
       });
       window.alert("User created, returning to login");
       setUsername("");
       setPassword("");
-      isAuthorized(True);
+      isAuthorized(true);
       navigate("/");
     }
   };
@@ -60,8 +66,8 @@ const Register = () => {
         <input
           type="text"
           name="username"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <br />
         <label>Password:</label>
