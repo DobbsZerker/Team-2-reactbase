@@ -1,19 +1,26 @@
 package org.team2.domain;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.team2.domain.Restaurant;
+
 import java.util.List;
 
-    @RepositoryRestResource(collectionResourceRel = "restaurant", path = "restaurant")
-    public interface RestaurantRepo extends JpaRepository<Restaurant, Long> {
+// This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
+// CRUD refers Create, Read, Update, Delete
 
 
-        public List<Restaurant> FindRestaurant(@Param("restaurant")String restaurant);
+@CrossOrigin
+@RepositoryRestResource(collectionResourceRel = "restaurant", path = "restaurant")
 
-        public List<Restaurant> FindCity(@Param("city")String city);
+public interface RestaurantRepo extends CrudRepository<Restaurant, Long> {
 
-
+    List<Restaurant> findByBusinessName(@Param("business_name") String businessName);
+    List<Restaurant> findByCity(@Param("city") String city);
+    List<Restaurant> findByAddress(@Param("address") String address);
+    List<Restaurant> findByStars(@Param("stars") Integer stars);
+    List<Restaurant> findByReviewCount(@Param("reviewCount") Integer reviewCount);
 }

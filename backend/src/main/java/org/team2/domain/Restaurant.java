@@ -1,83 +1,60 @@
-/*
- * Copyright 2012-2014 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 package org.team2.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import org.hibernate.annotations.NaturalId;
+//import org.hibernate.annotations.Table;
 
-@Autowired
-RestaurantRepo restaurantRepo;
+
 @Entity
+@Table(name = "business")
 public class Restaurant implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Long businessId;
 
-	@ManyToOne(optional = false)
+
 	@NaturalId
 	private String city;
 
-	@Column(nullable = false)
 	@NaturalId
-	private String business_name;
+	private String businessName;
 
 
 
-	@Column(nullable = false)
+
 	private String address;
 
-
-	@Column(nullable = false)
 	private String categories;
 
-	@Column(nullable = false)
-	private Integer review_count ;
+	private Integer reviewCount ;
 
-
-
-	@Column(nullable = false)
 	private Integer stars;
+
+
 
 	protected Restaurant() {
 	}
 
-	public void setCity(String city) {
+
+
+
+
+	public Restaurant(String city, String name, Integer stars, Integer reviewCount, String categories, String address, Long id) {
 		this.city = city;
-	}
+		this.businessName = name;
+		this.address = address;
+		this.stars = stars;
+		this.reviewCount = reviewCount;
+		this.categories = categories;
+		this.businessId = id;
 
-	public void setName(String name) {
-		this.business_name = name;
-	}
-
-
-
-	public Restaurant(String city, String name) {
-		this.city = city;
-		this.business_name = name;
 	}
 
 	public String getCity() {
@@ -85,16 +62,24 @@ public class Restaurant implements Serializable {
 	}
 
 	public String getName() {
-		return this.business_name;
+		return this.businessName;
 	}
 
 	public String getAddress() {
 		return this.address;
 	}
 
+	public Integer getStars() {
+		return this.stars;
+	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public void setStars(Integer stars) {
+		this.stars= stars;
+	}
+
 
 	public String getCategories() {
 		return this.categories;
@@ -103,24 +88,32 @@ public class Restaurant implements Serializable {
 		this.categories = categories;
 	}
 
-	public Integer getReview_count() {
-		return review_count;
+	public Integer getReviewCount() {
+		return reviewCount;
 	}
 
-	public void setReview_count(Integer review_count) {
-		this.review_count = review_count;
+	public void setReviewCount(Integer reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public void setName(String name) {
+		this.businessName = name;
 	}
 
 
 	@Override
 	public String toString() {
 		return "Restaurant{" +
-				"id=" + id +
+				"id=" + businessId +
 				", city='" + city + '\'' +
-				", business_name='" + business_name + '\'' +
+				", business_name='" + businessName + '\'' +
 				", address='" + address + '\'' +
 				", categories='" + categories + '\'' +
-				", review_count=" + review_count +
+				", review_count=" + reviewCount +
 				", stars=" + stars +
 				'}';
 	}
