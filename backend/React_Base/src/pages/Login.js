@@ -32,7 +32,7 @@ const Login = (props) => {
     }
 
     // code to send value to server to check if user exists
-    await fetch(`http://localhost:8080/user/search/findByUsername?username=${username}`, {
+    await fetch(`http://54.172.240.244/user/search/findByUsername?username=${username}`, {
       method: "GET",
 
       headers: {

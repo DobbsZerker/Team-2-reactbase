@@ -16,7 +16,7 @@ function Search() {
 
     if (databaseValue === "business_id") {
       const res = await axios.get(
-        `http://localhost:8080/restaurant/${searchValue}`
+        `http://54.172.240.244/restaurant/${searchValue}`
       );
 
       const businessData = [];
@@ -27,7 +27,7 @@ function Search() {
 
     if (databaseValue === "business_name") {
       const res = await axios.get(
-        `http://localhost:8080/restaurant/search/findByBusinessName?business_name=${searchValue.replace(
+        `http://54.172.240.244/restaurant/search/findByBusinessName?business_name=${searchValue.replace(
                                                                                                           " ",
                                                                                                           "%20"
       )}`
@@ -41,7 +41,7 @@ function Search() {
 
     if (databaseValue === "city") {
       const res = await axios.get(
-        `http://localhost:8080/restaurant/search/findByCity?city=${searchValue.replace(
+        `http://54.172.240.244/restaurant/search/findByCity?city=${searchValue.replace(
                                                                                          " ",
                                                                                          "%20"
        )}`
