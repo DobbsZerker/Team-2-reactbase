@@ -35,7 +35,7 @@ const Register = () => {
       let user = new User(username, password);
       // bcrypt.hash(user.password, 10, (err, hash) => {})
       // ^^ this is where i would encode the password, unless server side encryption becomes my chosen solution
-      await fetch("http://localhost:8080/user/add", {
+      await fetch("http://54.172.240.244/user/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
